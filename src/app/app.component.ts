@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     //Removing Syncfusion premium dialog after 2 seconds
     setTimeout(() => {
-      const els = document.querySelectorAll('div[style*="z-index: 999999999"]');
+      const els = document.querySelectorAll('div[style*="z-index: 999999999"]')
       els.forEach((e) => {
         e.remove();
       });

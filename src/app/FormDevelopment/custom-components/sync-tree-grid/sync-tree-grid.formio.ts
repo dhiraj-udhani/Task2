@@ -4,7 +4,7 @@ import { FormioCustomComponentInfo } from '../custom-lib/elements.common';
 import { SyncTreeGridComponent } from './sync-tree-grid.component';
 import { Components } from 'formiojs';
 
-let editForm = () => {
+const editForm = () => {
   // Call the editForm method of the superclass to get the base form structure.
   const listComp = Components.components.textfield.editForm();
   // console.log(listComp);

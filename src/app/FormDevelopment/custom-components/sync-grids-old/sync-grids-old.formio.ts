@@ -4,7 +4,7 @@ import { registerCustomFormioComponent } from '../custom-lib/register-custom-com
 import { SyncGridsComponentOld } from './sync-grids-old.component';
 import { Components } from 'formiojs';
 
-let editForm = () => {
+const editForm = () => {
   // Call the editForm method of the superclass to get the base form structure.
   const listComp = Components.components.textfield.editForm();
   // console.log(listComp);

@@ -213,7 +213,7 @@ export class SyncGridsComponentOld
   }
 
   save() {
-    var persistData = (this.grid as GridComponent).getPersistData(); // Grid persistData
+    const persistData = (this.grid as GridComponent).getPersistData(); // Grid persistData
     localStorage.setItem('gridData', persistData);
     this.message = 'Grid state saved. !!!';
   }
@@ -221,7 +221,7 @@ export class SyncGridsComponentOld
   loadGridState() {
     console.log('load');
 
-    let value: string = localStorage.getItem('gridData') as string;
+    const value: string = localStorage.getItem('gridData') as string;
     this.state = JSON.parse(value);
     if (this.state) {
       this.updateHeaderForColumns();
@@ -283,10 +283,10 @@ export class SyncGridsComponentOld
   actionComplete(args: PageEventArgs) {
     console.log('actionComplete :', args);
     if (args.requestType == 'refresh') {
-      if (!this.stateLoaded) {
+      if (!this.stateLoaded) {+
         this.loadGridState();
         this.stateLoaded = true; // Set the flag to true after loading the state
-      }
+      }``;
     }
   }
 

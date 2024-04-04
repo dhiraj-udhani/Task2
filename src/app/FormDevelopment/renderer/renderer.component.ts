@@ -39,7 +39,7 @@ export class RendererComponent implements OnInit {
       });
     }, 2000);
     // Retrieve form templates from localStorage if they exist
-    let existingData = localStorage.getItem('formData');
+    const existingData = localStorage.getItem('formData');
     if (existingData !== null) {
       this.formTemplates = JSON.parse(existingData);
     }

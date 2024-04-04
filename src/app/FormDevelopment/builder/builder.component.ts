@@ -5,11 +5,11 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
-import { FormioForm, FormioModule, FormioUtils } from '@formio/angular';
+import { FormioForm, FormioModule } from '@formio/angular';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ApiService } from '../../Services/Api.service';
+// import { ApiService } from '../../Services/Api.service';
 
 @Component({
   selector: 'app-builder',
@@ -66,7 +66,7 @@ export class BuilderComponent {
       this.setForm();
     } else {
       this.selectedFormIndex = event.target.value;
-      this.formMode = this.formTemplates[this.selectedFormIndex].display;
+      this.formMode = this.formTemplates[this.selectedFormIndex]?.display;
       this.setForm(this.formTemplates[this.selectedFormIndex]);
     }
   }
@@ -76,7 +76,7 @@ export class BuilderComponent {
   }
 
   loadFromLocal() {
-    let existingData = localStorage.getItem('formData');
+    const existingData = localStorage.getItem('formData');
     if (existingData !== null) {
       this.formTemplates = JSON.parse(existingData);
     }
@@ -88,17 +88,17 @@ export class BuilderComponent {
       event.type === 'updateComponent' &&
       event.component.type === 'syncgrid'
     ) {
-      document
-        .querySelectorAll('div[style*="background-color: rgba(0, 0, 0, 0.5)"]')
-        .forEach((e) => {
-          e.remove();
-        });
+      // document
+      //   .querySelectorAll('div[style*="background-color: rgba(0, 0, 0, 0.5)"]')
+      //   .forEach((e) => {
+      //     e.remove();
+      //   });
 
-      document
-        .querySelectorAll('div[style*="z-index: 999999999"]')
-        .forEach((e) => {
-          e.remove();
-        });
+      // document
+      //   .querySelectorAll('div[style*="z-index: 999999999"]')
+      //   .forEach((e) => {
+      //     e.remove();
+      //   });
     }
   }
 
@@ -111,13 +111,13 @@ export class BuilderComponent {
    * - Clears the screen title input and displays an alert confirming the submission.
    */
   onSaveForm() {
-    let existingData = localStorage.getItem('formData');
+    const existingData = localStorage.getItem('formData');
 
     if (existingData === null) {
       this.form.id = Math.floor(Math.random() * (999999 - 100000)) + 100000;
       localStorage.setItem('formData', JSON.stringify([this.form]));
     } else {
-      let formsJson = JSON.parse(existingData);
+      const formsJson = JSON.parse(existingData);
       let alradyExistForm: boolean = false;
       let alradyExistFormIndex: number = -1;
 
