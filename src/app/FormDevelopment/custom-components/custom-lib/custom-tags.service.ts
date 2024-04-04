@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn:'root'
+	providedIn:'root'
 })
 export class CustomTagsService {
-  tags: string[] = [];
+	tags: string[] = [];
 
-  addCustomTag(tag: string) {
-    this.tags.push(tag);
-  }
+	addCustomTag(tag: string) {
+		this.tags.push(tag);
+	}
 }

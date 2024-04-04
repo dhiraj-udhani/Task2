@@ -1,39 +1,39 @@
 import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
+	AfterViewInit,
+	Component,
+	ElementRef,
+	EventEmitter,
+	Input,
+	Output,
+	ViewChild,
 } from '@angular/core';
 import {
-  FilterService,
-  GridComponent,
-  GridModule,
-  GroupService,
-  PageService,
-  RowSelectEventArgs,
-  SelectionSettingsModel,
-  SortService,
+	FilterService,
+	GridComponent,
+	GridModule,
+	GroupService,
+	PageService,
+	RowSelectEventArgs,
+	SelectionSettingsModel,
+	SortService,
 } from '@syncfusion/ej2-angular-grids';
 import { PageSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { HttpClient } from '@angular/common/http';
 import { FormioEvent } from '../custom-lib/elements.common';
 
 @Component({
-  selector: 'sync-grid-new',
-  templateUrl: './sync-grids-new.component.html',
-  standalone: true,
-  imports: [GridModule],
-  providers: [PageService, SortService, FilterService, GroupService],
+	selector: 'sync-grid-new',
+	templateUrl: './sync-grids-new.component.html',
+	standalone: true,
+	imports: [GridModule],
+	providers: [PageService, SortService, FilterService, GroupService],
 })
 export class SyncGridsComponent implements AfterViewInit {
-  public dataSource: any;
-  public dataArray: any;
-  public Record: Object;
-  public pageSettings?: PageSettingsModel;
-  public url = 'https://dummyjson.com/products';
+	public dataSource: any;
+	public dataArray: any;
+	public Record: Object;
+	public pageSettings?: PageSettingsModel;
+	public url = 'https://dummyjson.com/products';
   @ViewChild('grid', { static: true }) grid: GridComponent;
   @Input() value: object;
   @Output() valueChange = new EventEmitter<object>();
@@ -46,8 +46,8 @@ export class SyncGridsComponent implements AfterViewInit {
    * Default mode is 'Row' and type is 'Single'.
    */
   public selectionOptions?: SelectionSettingsModel = {
-    mode: 'Row',
-    type: 'Single',
+  	mode: 'Row',
+  	type: 'Single',
   };
 
   /**
@@ -56,52 +56,52 @@ export class SyncGridsComponent implements AfterViewInit {
    * @param http The HttpClient service for making HTTP requests.
    */
   constructor(private http: HttpClient) {
-    // Make an HTTP GET request to fetch product data
-    this.http.get(this.url).subscribe((res: any) => {
-      // Populate the dataSource property with the products obtained from the response
-      this.dataSource = res.products;
-      this.pageSettings = { pageSize: 15 };
-    });
-    this.getDataRows();
-    console.log(this.value);
-    this.valueChange.subscribe((res) => {
-      console.log(res);
-    });
-    this.FormioEvent.subscribe((res) => {
-      console.log(res);
-    });
+  	// Make an HTTP GET request to fetch product data
+  	this.http.get(this.url).subscribe((res: any) => {
+  		// Populate the dataSource property with the products obtained from the response
+  		this.dataSource = res.products;
+  		this.pageSettings = { pageSize: 15 };
+  	});
+  	this.getDataRows();
+  	console.log(this.value);
+  	this.valueChange.subscribe((res) => {
+  		console.log(res);
+  	});
+  	this.FormioEvent.subscribe((res) => {
+  		console.log(res);
+  	});
   }
 
   ngonInit(): void {
-    //Removing Syncfusion premium dialog after 2 seconds
-    setTimeout(() => {
-      const els = document.querySelectorAll('div[style*="z-index: 999999999"]');
-      els.forEach((e) => {
-        e.remove();
-      });
-    }, 2000);
+  	//Removing Syncfusion premium dialog after 2 seconds
+  	setTimeout(() => {
+  		const els = document.querySelectorAll('div[style*="z-index: 999999999"]');
+  		els.forEach((e) => {
+  			e.remove();
+  		});
+  	}, 2000);
   }
   ngAfterViewInit() {
-    // Ensure that the grid instance is available before calling getDataRows
-    if (this.grid) {
-      setTimeout(() => {
-        this.getDataRows();
-      }, 1000);
-    }
+  	// Ensure that the grid instance is available before calling getDataRows
+  	if (this.grid) {
+  		setTimeout(() => {
+  			this.getDataRows();
+  		}, 1000);
+  	}
   }
 
   rowSelected(args: RowSelectEventArgs): void {
-    // Assigning the data from the row selection event to the Record property
-    this.Record = args.data;
-    console.log(this.Record);
-    // Displaying an alert with the Order ID retrieved from the Record object
-    alert(`Order ID : ${this.Record['id']}`);
+  	// Assigning the data from the row selection event to the Record property
+  	this.Record = args.data;
+  	console.log(this.Record);
+  	// Displaying an alert with the Order ID retrieved from the Record object
+  	alert(`Order ID : ${this.Record['id']}`);
   }
 
   getDataRows(): any {
-    if (this.grid) {
-      // console.log(this.grid.dataSource);
-      this.dataArray = this.grid.dataSource;
-    }
+  	if (this.grid) {
+  		// console.log(this.grid.dataSource);
+  		this.dataArray = this.grid.dataSource;
+  	}
   }
 }

@@ -9,35 +9,35 @@ import { ApiService } from './Services/Api.service';
 import { registerSyncGridTreeComponent } from './FormDevelopment/custom-components/sync-tree-grid/sync-tree-grid.formio';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    RouterLink,
-    CommonModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule,
-  ],
-  providers: [ApiService],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+	selector: 'app-root',
+	standalone: true,
+	imports: [
+		RouterOutlet,
+		RouterLink,
+		CommonModule,
+		FormsModule,
+		HttpClientModule,
+		RouterModule,
+	],
+	providers: [ApiService],
+	templateUrl: './app.component.html',
+	styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-  constructor(injector: Injector) {
-    // Registers the SyncGridNewComponent using the provided Injector.
-    registerSyncGridNewComponent(injector);
-    registerSyncGridOldComponent(injector);
-    registerSyncGridTreeComponent(injector);
-  }
+	constructor(injector: Injector) {
+		// Registers the SyncGridNewComponent using the provided Injector.
+		registerSyncGridNewComponent(injector);
+		registerSyncGridOldComponent(injector);
+		registerSyncGridTreeComponent(injector);
+	}
 
-  ngOnInit(): void {
-    //Removing Syncfusion premium dialog after 2 seconds
-    setTimeout(() => {
-      const els = document.querySelectorAll('div[style*="z-index: 999999999"]')
-      els.forEach((e) => {
-        e.remove();
-      });
-    }, 2000);
-  }
+	ngOnInit(): void {
+		//Removing Syncfusion premium dialog after 2 seconds
+		setTimeout(() => {
+			const els = document.querySelectorAll('div[style*="z-index: 999999999"]');
+			els.forEach((e) => {
+				e.remove();
+			});
+		}, 2000);
+	}
 }

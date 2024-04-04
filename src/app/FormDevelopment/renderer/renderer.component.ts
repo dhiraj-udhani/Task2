@@ -1,20 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import {
-  Formio,
-  FormioComponent,
-  FormioForm,
-  FormioUtils,
+	Formio,
+	FormioComponent,
+	FormioForm,
+	FormioUtils,
 } from '@formio/angular';
 import { ApiService } from '../../Services/Api.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-renderer',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './renderer.component.html',
-  styleUrl: './renderer.component.css',
+	selector: 'app-renderer',
+	standalone: true,
+	imports: [CommonModule],
+	templateUrl: './renderer.component.html',
+	styleUrl: './renderer.component.css',
 })
 export class RendererComponent implements OnInit {
   @ViewChild(FormioComponent) formioComponent: FormioComponent;
@@ -31,18 +31,18 @@ export class RendererComponent implements OnInit {
    * - Retrieves form templates from localStorage if they exist.
    */
   ngOnInit(): void {
-    // Removing Syncfusion premium dialog after 2 seconds
-    setTimeout(() => {
-      const els = document.querySelectorAll('div[style*="z-index: 999999999"]');
-      els.forEach((e) => {
-        e.remove();
-      });
-    }, 2000);
-    // Retrieve form templates from localStorage if they exist
-    const existingData = localStorage.getItem('formData');
-    if (existingData !== null) {
-      this.formTemplates = JSON.parse(existingData);
-    }
+  	// Removing Syncfusion premium dialog after 2 seconds
+  	setTimeout(() => {
+  		const els = document.querySelectorAll('div[style*="z-index: 999999999"]');
+  		els.forEach((e) => {
+  			e.remove();
+  		});
+  	}, 2000);
+  	// Retrieve form templates from localStorage if they exist
+  	const existingData = localStorage.getItem('formData');
+  	if (existingData !== null) {
+  		this.formTemplates = JSON.parse(existingData);
+  	}
   }
 
   /**
@@ -53,33 +53,33 @@ export class RendererComponent implements OnInit {
    * @param event The event object containing the target value.
    */
   renderTemplate(event: any) {
-    if (event.target.value == -1) {
-      // No template selected
-      this.isTemplateSelected = false;
-    } else {
-      // Template selected
-      this.isTemplateSelected = true;
-      this.isDataSubmited = false; // Reset submission flag
-      // Retrieve selected template
-      this.selectedTemplate = this.formTemplates[event.target.value];
-      // Render the selected template using Formio.createForm
-      Formio.createForm(
-        document.getElementById('formio'), // Formio container element
-        this.selectedTemplate, // Selected template
-        {
-          sanitize: true,
-          sanitizeConfig: {
-            allowedTags: ['sync-grid-new', 'sync-grids-old'], // Allowed tags for sanitization
-            addTags: ['sync-grid-new', 'sync-grids-old'], // Additional tags to allow
-          },
-        }
-      ).then((form: any) => {
-        form.on('submit', (submission: any) => {
-          console.log(submission);
-          this.isDataSubmited = true;
-          this.submitedTemplate = submission.data;
-        });
-      });
-    }
+  	if (event.target.value == -1) {
+  		// No template selected
+  		this.isTemplateSelected = false;
+  	} else {
+  		// Template selected
+  		this.isTemplateSelected = true;
+  		this.isDataSubmited = false; // Reset submission flag
+  		// Retrieve selected template
+  		this.selectedTemplate = this.formTemplates[event.target.value];
+  		// Render the selected template using Formio.createForm
+  		Formio.createForm(
+  			document.getElementById('formio'), // Formio container element
+  			this.selectedTemplate, // Selected template
+  			{
+  				sanitize: true,
+  				sanitizeConfig: {
+  					allowedTags: ['sync-grid-new', 'sync-grids-old'], // Allowed tags for sanitization
+  					addTags: ['sync-grid-new', 'sync-grids-old'], // Additional tags to allow
+  				},
+  			}
+  		).then((form: any) => {
+  			form.on('submit', (submission: any) => {
+  				console.log(submission);
+  				this.isDataSubmited = true;
+  				this.submitedTemplate = submission.data;
+  			});
+  		});
+  	}
   }
 }
